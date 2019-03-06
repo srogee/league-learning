@@ -6,6 +6,7 @@
 window.$ = window.jQuery = require('jquery');
 const fs = require('fs');
 const path = require('path');
+const { mainComposite } = require('./displayMain.js')
 
 // Constants
 const dataFolder = path.join(__dirname, 'data');
@@ -35,7 +36,9 @@ function start() {
         }
     });
 
-    console.log(`Found ${counter} Summoner's Rift full items.`);
+    //console.log(`Found ${counter} Summoner's Rift full items.`);
+
+    d = new mainComposite();
 }
 
 function isFullItem(item) {
