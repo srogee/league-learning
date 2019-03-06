@@ -10,46 +10,11 @@ const { ItemChooser } = require('./items.js');
 const { mainComposite } = require('./displayMain.js')
 
 // Constants
-const dataFolder = path.join(__dirname, 'data');
-const Maps = {
-    // Maps enum. See https://developer.riotgames.com/game-constants.html to implement more
-    SummonersRift: 11
-}
-
-// Globals
-var itemDictionary = null;
-
-// Let's get the party started
-//start();
-
-new ItemChooser();
-new mainComposite();
 
 // Functions
 function start() {
-    var items = JSON.parse(fs.readFileSync(path.join(dataFolder, 'items.json'))); // Contains info about the version of the data, item prototype, and the item data itself
-    itemDictionary = items.data;
-    var counter = 0;
-
-    Object.getOwnPropertyNames(itemDictionary).forEach((itemId) => {
-        var item = itemDictionary[itemId];
-        if (item.maps[Maps.SummonersRift] && isFullItem(item)) {
-            // If this item is supported on Summoners Rift and it doesn't build into anything
-            console.log(item.name);
-            counter++;
-        }
-    });
-
-    //console.log(`Found ${counter} Summoner's Rift full items.`);
+    new ItemChooser();
+    new mainComposite();    
 }
 
-function isFullItem(item) {
-    return (item.from && item.from.length > 0 && (!item.into || item.intolength === 0 || buildsIntoOrnnItem(item)));
-}
-
-// Returns true if the item builds into a special Ornn item (e.g Rabadon's Deathcrown).
-function buildsIntoOrnnItem(item) {
-    return item.into && item.into.some((otherItemId) => {
-        return itemDictionary[otherItemId].requiredAlly === 'Ornn'
-    });
-}
+start();

@@ -13,7 +13,7 @@ class mainComposite {
         Object.getOwnPropertyNames(champDictionary).forEach((champId) => {
             var champ = champDictionary[champId];
             $("#champs").append(`<option value="${champ.name}">`);
-            console.log("Champion " + champ.name);
+            console.log(champ.name);
         });
         
     }
