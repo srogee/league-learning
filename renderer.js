@@ -7,6 +7,7 @@ window.$ = window.jQuery = require('jquery');
 const fs = require('fs');
 const path = require('path');
 const { ItemChooser } = require('./items.js');
+const { mainComposite } = require('./displayMain.js')
 
 // Constants
 const dataFolder = path.join(__dirname, 'data');
@@ -22,6 +23,7 @@ var itemDictionary = null;
 //start();
 
 new ItemChooser();
+new mainComposite();
 
 // Functions
 function start() {
@@ -38,7 +40,7 @@ function start() {
         }
     });
 
-    console.log(`Found ${counter} Summoner's Rift full items.`);
+    //console.log(`Found ${counter} Summoner's Rift full items.`);
 }
 
 function isFullItem(item) {
