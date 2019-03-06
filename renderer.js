@@ -6,6 +6,7 @@
 window.$ = window.jQuery = require('jquery');
 const fs = require('fs');
 const path = require('path');
+const { ItemChooser } = require('./items.js');
 
 // Constants
 const dataFolder = path.join(__dirname, 'data');
@@ -18,7 +19,9 @@ const Maps = {
 var itemDictionary = null;
 
 // Let's get the party started
-start();
+//start();
+
+new ItemChooser();
 
 // Functions
 function start() {
