@@ -4,8 +4,7 @@
     "description": "",
     "main": "main.js",
     "scripts": {
-        "start": "node main.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "electron ."
     },
     "repository": {
         "type": "git",
@@ -15,5 +14,8 @@
         "Joe Sorgea",
         "Tom Nielsen"
     ],
-    "license": "ISC"
+    "license": "CC0-1.0",
+    "devDependencies": {
+        "electron": "^4.0.7"
+    }
 }

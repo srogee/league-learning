@@ -1,45 +1,56 @@
-// Dependencies
-const fs = require('fs');
-const path = require('path');
+// Modules to control application life and create native browser window
+const {app, BrowserWindow} = require('electron')
 
-// Constants
-const dataFolder = path.join(__dirname, 'data');
-const Maps = {
-    // Maps enum. See https://developer.riotgames.com/game-constants.html to implement more
-    SummonersRift: 11
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow
+
+function createWindow () {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
+
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
+
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
+
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
+  })
 }
 
-// Globals
-var itemDictionary = null;
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', createWindow)
 
-// Let's get the party started
-start();
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+  // On macOS it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
 
-// Functions
-function start() {
-    var items = JSON.parse(fs.readFileSync(path.join(dataFolder, 'items.json'))); // Contains info about the version of the data, item prototype, and the item data itself
-    itemDictionary = items.data;
-    var counter = 0;
+app.on('activate', function () {
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow()
+  }
+})
 
-    Object.getOwnPropertyNames(itemDictionary).forEach((itemId) => {
-        var item = itemDictionary[itemId];
-        if (item.maps[Maps.SummonersRift] && isFullItem(item)) {
-            // If this item is supported on Summoners Rift and it doesn't build into anything
-            console.log(item.name);
-            counter++;
-        }
-    });
-
-    console.log(`Found ${counter} Summoner's Rift full items.`);
-}
-
-function isFullItem(item) {
-    return (item.from && item.from.length > 0 && (!item.into || item.intolength === 0 || buildsIntoOrnnItem(item)));
-}
-
-// Returns true if the item builds into a special Ornn item (e.g Rabadon's Deathcrown).
-function buildsIntoOrnnItem(item) {
-    return item.into && item.into.some((otherItemId) => {
-        return itemDictionary[otherItemId].requiredAlly === 'Ornn'
-    });
-}
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
