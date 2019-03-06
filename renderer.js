@@ -3,6 +3,7 @@
 // All of the Node.js APIs are available in this process.
 
 // Dependencies
+window.$ = window.jQuery = require('jquery');
 const fs = require('fs');
 const path = require('path');
 
