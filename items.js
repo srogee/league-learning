@@ -20,7 +20,7 @@ class ItemChooser {
             var item = this.itemDictionary[itemId];
             if (item.maps[Maps.SummonersRift] && this.isFullItem(item)) {
                 // If this item is supported on Summoners Rift and it doesn't build into anything
-                $('#items').append(`<option value="${item.name}">`);
+                $('#items').append(`<option value="${itemId}">${item.name}`);
             }
         });
     }

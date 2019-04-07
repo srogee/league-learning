@@ -12,26 +12,25 @@ class mainComposite {
     
         Object.getOwnPropertyNames(this.champDictionary).forEach((champId) => {
             var champ = this.champDictionary[champId];
-            $("#champs").append(`<option value="${champ.name}">`);
+            $("#champs").append(`<option value="${champId}">${champ.name}`);
         });
-        var stats = ["Attack damage"];
+        var stats = ["Attack Damage"];
         stats.forEach((stat) => {
-            $("#statList").append(`<option value="${stat}">`);
+            $("#statList").append(`<option value="${stat}">${stat}`);
         });
 
-        $('#calculate').click(this.calculate);
+        $('#calculate').click(this.calculate.bind(this));
     }
 
     calculate() {
-        this.champDictionary = champs.data;
-        var item = document.getElementById("itemSelect").value;
-        var champ = document.getElementById("champSelect").value;
-        var stat = document.getElementById("stat").value;
+        var item = document.getElementById("items").value;
+        var champ = document.getElementById("champs").value;
+        var stat = document.getElementById("statList").value;
         console.log(item);
         console.log(champ);
         console.log(stat);
 
-        var champObj = this.champDictionary["Amumu"];
+        var champObj = this.champDictionary[champ];
         console.log(champObj);
     }
 
