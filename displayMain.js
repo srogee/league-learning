@@ -12,13 +12,13 @@ class mainComposite {
     
         Object.getOwnPropertyNames(champDictionary).forEach((champId) => {
             var champ = champDictionary[champId];
+            var stats = ["ad"];
             $("#champs").append(`<option value="${champ.name}">`);
-            console.log(champ.name);
+            $("#statList").append(`<option value="${stats.name}">`);
         });
-        
+
     }
+
 }
-
-
 
 module.exports = { mainComposite }

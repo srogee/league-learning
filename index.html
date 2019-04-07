@@ -13,9 +13,20 @@
     <br>
     <label>Choose a champion from this list: <input id="champSelect" list="champs" name="League Champs" /></label>
     <datalist id="champs"></datalist>
+    <br>
+    <label>Choose what to prioritize: <input id="stat" list="statList"/></label>
+    <datalist id="statList"></datalist>
+    <button onclick="calculate()">Click me</button>
     <script>
         // You can also require other files to run in this process
-        require('./renderer.js')
+        require('./renderer.js');
+
+        function calculate() {
+            var item = document.getElementById("itemSelect").value;
+            var champ = document.getElementById("champSelect").value;
+            console.log(item);
+            console.log(champ);
+        }
     </script>
 
 </body>
