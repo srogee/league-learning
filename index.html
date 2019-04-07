@@ -16,17 +16,11 @@
     <br>
     <label>Choose what to prioritize: <input id="stat" list="statList"/></label>
     <datalist id="statList"></datalist>
-    <button onclick="calculate()">Click me</button>
+    <button id="calculate">Find the best items</button>
     <script>
         // You can also require other files to run in this process
         require('./renderer.js');
 
-        function calculate() {
-            var item = document.getElementById("itemSelect").value;
-            var champ = document.getElementById("champSelect").value;
-            console.log(item);
-            console.log(champ);
-        }
     </script>
 
 </body>

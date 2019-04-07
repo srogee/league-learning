@@ -8,15 +8,31 @@ class mainComposite {
 
     constructor(){
         var champs = JSON.parse(fs.readFileSync(path.join(dataFolder, 'champions.json')));
-        var champDictionary = champs.data;
+        this.champDictionary = champs.data;
     
-        Object.getOwnPropertyNames(champDictionary).forEach((champId) => {
-            var champ = champDictionary[champId];
-            var stats = ["ad"];
+        Object.getOwnPropertyNames(this.champDictionary).forEach((champId) => {
+            var champ = this.champDictionary[champId];
             $("#champs").append(`<option value="${champ.name}">`);
-            $("#statList").append(`<option value="${stats.name}">`);
+        });
+        var stats = ["Attack damage"];
+        stats.forEach((stat) => {
+            $("#statList").append(`<option value="${stat}">`);
         });
 
+        $('#calculate').click(this.calculate);
+    }
+
+    calculate() {
+        this.champDictionary = champs.data;
+        var item = document.getElementById("itemSelect").value;
+        var champ = document.getElementById("champSelect").value;
+        var stat = document.getElementById("stat").value;
+        console.log(item);
+        console.log(champ);
+        console.log(stat);
+
+        var champObj = this.champDictionary["Amumu"];
+        console.log(champObj);
     }
 
 }
